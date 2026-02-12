@@ -30,5 +30,32 @@
  *   // => "Dil ka Kya Kare"
  */
 export function fixBollywoodTitle(title) {
-  // Your code here
+  if(typeof title !== 'string'){
+    return "";
+  }
+
+  const choteWords = [
+    "ka", "ki", "ke", "se", "aur", "ya",
+    "the", "of", "in", "a", "an"
+  ];
+
+  let cleanedSpace = title.trim().replace(/\s+/g, " ");
+  if (cleanedSpace === "") {
+     return "";
+  }
+  let movieWords = cleanedSpace.split(" ");
+
+  return movieWords.map((word, index)=>{
+     const lowerWord = word.toLowerCase();
+
+     if(index === 0){
+      return lowerWord.charAt(0).toUpperCase() + lowerWord.slice(1);
+     }
+
+     if(choteWords.includes(lowerWord)){
+      return lowerWord;
+     }
+
+     return lowerWord.charAt(0).toUpperCase() + lowerWord.slice(1);
+  }).join(" ");
 }
